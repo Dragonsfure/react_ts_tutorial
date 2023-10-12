@@ -1,14 +1,15 @@
-import React, { MouseEvent, useState } from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
 
 interface IAppProps {}
 
 const Home: React.FunctionComponent<IAppProps> = (props) => {
     //gets an array of the instance and a function to change the instance 
-  let [clickVal, updateValue] = useState(0);
+  const [clickVal, updateValue] = useState<number>(0);
+  useEffect( () => { console.log(clickVal) }, [clickVal] ) 
+
   const OnClick = (e: MouseEvent<HTMLButtonElement>) => {
-    console.log("clicked");
-    updateValue(++clickVal);
-    console.log( clickVal);
+    //console.log("clicked");
+    updateValue(clickVal + 1);
   };
 
   return (
