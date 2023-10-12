@@ -1,22 +1,20 @@
 import React, { MouseEvent, useEffect, useState } from "react";
+import IBlog from "./interfaces/IBlog";
 
-interface IAppProps {}
+interface BlogsProps{
+    blogs: IBlog[];
+}
 
-const Home: React.FunctionComponent<IAppProps> = (props) => {
-    //gets an array of the instance and a function to change the instance 
-  const [clickVal, updateValue] = useState<number>(0);
-  useEffect( () => { console.log(clickVal) }, [clickVal] ) 
-
-  const OnClick = (e: MouseEvent<HTMLButtonElement>) => {
-    //console.log("clicked");
-    updateValue(clickVal + 1);
-  };
-
+const Home: React.FunctionComponent<BlogsProps> = ({blogs}:BlogsProps) => {
+ 
   return (
     <div className="Home">
-      <h2>Homepage</h2>
-      <button onClick={OnClick}>Click me</button>
-      <p>Button clicked: {clickVal} </p>
+      {blogs.map(item  => (
+        <div className="blog-preview" key={item.id} >
+        <h2>{ item.title }</h2>
+        <p>Written by { item.author }</p>
+      </div>
+      ))}
     </div>
   );
 };
