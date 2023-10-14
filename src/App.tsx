@@ -19,8 +19,16 @@ function App() {
     <div className="App">
       <Navbar />
 
+
       <div className="content">
-        <Home blogs ={blogs}/>
+        <Home
+          blogs={blogs}
+          title="All Blogs"
+        />
+        <Home
+          blogs={blogs.filter((item) => item.author === "mario")}
+          title="All Marios"
+        />
       </div>
     </div>
   );
