@@ -1,23 +1,19 @@
-import React, { MouseEvent, useEffect, useState } from "react";
-import IBlog from "./interfaces/IBlog";
+import { useEffect, useState } from "react";
+import BlogList from "./BlogList";
+import useFetch from "./useFetch";
 
 interface BlogsProps {
-  title: string;
-  blogs: IBlog[] | null;
-  handleDelete: Function;
+ 
 }
 
 const Home: React.FunctionComponent<BlogsProps> = (props: BlogsProps) => {
+  const { error, isPending, data: blogs } = useFetch('http://localhost:8000/blogs')
+
   return (
-    <div className="Home">
-      <h1>{props.title}</h1>
-      {props.blogs?.map((item) => (
-        <div className="blog-preview" key={item.id}>
-          <h2>{item.title}</h2>
-          <p>Written by {item.author}</p>
-          <button onClick={() => props.handleDelete(item.id)}>Delete</button>
-        </div>
-      ))}
+    <div className="home">
+      { error && <div>{ error.message }</div> }
+      { isPending && <div>Loading...</div> }
+      { blogs && <BlogList blogs={blogs} title={"All Blogs"} /> }
     </div>
   );
 };
