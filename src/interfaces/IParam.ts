@@ -1,6 +1,6 @@
 
 interface IParam {
-   id: string
+   id: "id"
   }
 
 export default IParam
