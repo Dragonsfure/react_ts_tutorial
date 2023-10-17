@@ -61,8 +61,9 @@
 .blog-details div {
   margin: 20px 0;
 }
-.blog-details button {
-  background: #ac0b0b;
+
+.blog-details button{
+  background: rgb(211, 214, 211);
   color: #fff;
   border: 0;
   padding: 8px;
