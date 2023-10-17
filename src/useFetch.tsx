@@ -10,7 +10,6 @@ const useFetch = (url: string): IHook => {
   useEffect(() => {
     const abortCont = new AbortController();
 
-    setTimeout(() => {
       fetch(url, { signal: abortCont.signal })
         .then((res) => {
           if (!res.ok) {
@@ -32,7 +31,6 @@ const useFetch = (url: string): IHook => {
             setError(err);
           }
         });
-    }, 1000);
 
     return () => abortCont.abort();
   }, [url]);
