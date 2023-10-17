@@ -26,7 +26,6 @@ const useFetch = (url: string): IHook => {
         })
         .catch((err:Error) => {
           if (err.name === "AbortError") {
-            console.log("Fetch aborted");
           } else {
             // auto catches network / connection error
             setIsPending(false);

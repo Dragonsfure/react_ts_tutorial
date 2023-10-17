@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import IBlog from "./interfaces/IBlog";
+import { useHistory } from "react-router-dom";
 
 interface ICreateProps {}
 
@@ -14,7 +14,8 @@ const Create: React.FunctionComponent<ICreateProps> = (props) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [author, setAuthor] = useState("");
-  const [isPending, setIsPending] = useState(false)
+  const [isPending, setIsPending] = useState(false);
+  const history = useHistory();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,9 +26,10 @@ const Create: React.FunctionComponent<ICreateProps> = (props) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(blog),
     }).then(() => {
-      console.log("new blog added");
       setIsPending(false);
+      history.push("/");
     });
+
   };
 
   return (
@@ -55,9 +57,8 @@ const Create: React.FunctionComponent<ICreateProps> = (props) => {
           <option value="yoshi">yoshi</option>
         </select>
 
-       { !isPending && <button >Create Blog</button> }
-       { isPending && <button disabled >Adding Blog...</button> }
-
+        {!isPending && <button>Create Blog</button>}
+        {isPending && <button disabled>Adding Blog...</button>}
       </form>
     </div>
   );
